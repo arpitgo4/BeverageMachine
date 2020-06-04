@@ -1,0 +1,43 @@
+[
+    { 
+        "id": "Ginger Tea", 
+        "ingredients_list": [
+            { "id": "Hot Water", "quantity": 50 },
+            { "id": "Hot Milk", "quantity": 10 },
+            { "id": "Tea Leaves Syrup", "quantity": 10 },
+            { "id": "Ginger Syrup", "quantity": 5 },
+            { "id": "Sugar Syrup", "quantity": 10 }
+        ] 
+    },
+    { 
+        "id": "Elaichi Tea", 
+        "ingredients_list": [
+            { "id": "Hot Water", "quantity": 50 },
+            { "id": "Hot Milk", "quantity": 10 },
+            { "id": "Tea Leaves Syrup", "quantity": 10 },
+            { "id": "Elaichi Syrup", "quantity": 5 },
+            { "id": "Sugar Syrup", "quantity": 10 }
+        ] 
+    },
+    { 
+        "id": "Coffee", 
+        "ingredients_list": [
+            { "id": "Hot Water", "quantity": 50 },
+            { "id": "Hot Milk", "quantity": 10 },
+            { "id": "Coffee Syrup", "quantity": 10 },
+            { "id": "Sugar Syrup", "quantity": 10 }
+        ] 
+    },
+    { 
+        "id": "Hot Milk", 
+        "ingredients_list": [
+            { "id": "Milk", "quantity": 50 }
+        ] 
+    },
+    { 
+        "id": "Hot Water",
+        "ingredients_list": [
+            { "id": "Water", "quantity": 50 }
+        ] 
+    }
+]

@@ -1,0 +1,11 @@
+[
+    { "id": "Hot Water", "type": "LIQUID", "quantity": 500, "low_quantity": 50 },
+    { "id": "Hot Milk", "type": "LIQUID", "quantity": 500, "low_quantity": 50 },
+    { "id": "Tea Leaves Syrup", "type": "LIQUID", "quantity": 100, "low_quantity": 20 },
+    { "id": "Ginger Syrup", "type": "LIQUID", "quantity": 100, "low_quantity": 20 },
+    { "id": "Sugar Syrup", "type": "LIQUID", "quantity": 100, "low_quantity": 20 },
+    { "id": "Elaichi Syrup", "type": "LIQUID", "quantity": 100, "low_quantity": 20 },
+    { "id": "Coffee Syrup", "type": "LIQUID", "quantity": 100, "low_quantity": 20 },
+    { "id": "Milk", "type": "LIQUID", "quantity": 100, "low_quantity": 10 },
+    { "id": "Water", "type": "LIQUID", "quantity": 100, "low_quantity": 10 }
+]
