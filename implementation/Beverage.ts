@@ -4,7 +4,7 @@ import Ingredient from "./Ingredient";
 import LowIngredientException from "../exceptions/LowIngredientException";
 import AbstractFactory from "../factory/AbstractFactory";
 
-import Couplings from '../couplings';
+import Coupling from '../app';
 
 export default class Beverage {
     
@@ -16,7 +16,7 @@ export default class Beverage {
     constructor(beverageModel: BeverageModel, loggerInstance: any) {
         this.model = beverageModel;
         this.logger = loggerInstance;
-        this.ingredientFactory = Couplings.INGREDIENT_FACTORY;
+        this.ingredientFactory = Coupling.INGREDIENT_FACTORY;
     }
 
     private getIngredients(): Array<Ingredient> {
@@ -30,8 +30,10 @@ export default class Beverage {
     }
 
     private rollbackFetchedIngredients(ingredients: Array<Ingredient>): void {
-        for (const ingredient of ingredients)
+        for (const ingredient of ingredients) {
             ingredient.refillIngredient();
+            this.logger.info(`${ingredient.getId()} refilled!`);
+        }
     }
 
     // template method
@@ -40,19 +42,19 @@ export default class Beverage {
         const fetchedIngredients = [];
         for (const ing of ingredients) {
             try {
-                const fetchedIngredient = ing.fetchIngredient();
-                fetchedIngredients.push(fetchedIngredient);
+                ing.fetchIngredient();
+                fetchedIngredients.push(ing);
             } catch (e) {
                 if (e instanceof LowIngredientException) {
                     e.printErrorMessage();
                 } else {
-                    this.logger.error(`something went wrong!! ${e.message}`);
+                    this.logger.error(`something other went wrong!! ${e.message}`);
                 }
 
+                this.logger.info(`refilling fetched ingredients`);
                 this.rollbackFetchedIngredients(fetchedIngredients);
+                return undefined;
             }
-
-            return undefined;
         }
 
         return this;

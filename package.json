@@ -8,7 +8,7 @@
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "watch-ts": "tsc -w",
     "build-ts": "tsc",
-    "test": "ts-mocha -- tests/*.ts",
+    "test": "nyc ts-mocha",
     "test:watch": "ts-mocha --watch --recursive"
   },
   "keywords": [],
@@ -26,6 +26,7 @@
     "inversify": "^5.0.1",
     "mocha": "^5.0.1",
     "node-worker-threads-pool": "^1.3.1",
+    "nyc": "^15.1.0",
     "reflect-metadata": "^0.1.13",
     "ts-mocha": "^7.0.0"
   },

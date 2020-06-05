@@ -8,20 +8,23 @@ export default abstract class AbstractIngredientRepository extends AbstractRepos
 
 
     // synchronized method
-    public fetchIngredient(ingredientInstance: Ingredient): Ingredient {
-        const ingredientModel = <IngredientModel> this.get(ingredientInstance.getId());
+    public fetchIngredient(ingredientName: string, requiredQuantity: number): boolean {
+        const ingredientModel = <IngredientModel> this.get(ingredientName);
+        if (!ingredientModel)
+            return false;
+
         const { quantity: availableQuantity } = ingredientModel;
-        const requiredQuantity = ingredientInstance.getQuantity();
+
         if (requiredQuantity <= availableQuantity) {
             ingredientModel.quantity = availableQuantity - requiredQuantity;
-            this.put(ingredientInstance.getId(), ingredientModel);
+            this.put(ingredientName, ingredientModel);
 
             // TODO: check for low qunaitity and add indication
 
-            return ingredientInstance;
+            return true;
         }
 
-        return undefined;
+        return false;
     }
 
     public fillIngredient(ingredientInstance: Ingredient): void {

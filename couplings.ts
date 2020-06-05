@@ -26,12 +26,11 @@ const beverageFactoryInstance = new BeverageFactory(loggerInstance);
 const ingredientFactoryInstance = new IngredientFactory(loggerInstance);
 
 const beverageRepositoryInstance = new BeverageRepository(Constants.BEVERAGES_REPOSITORY, Constants.BEVERAGES_DATA_FILE_NAME, loggerInstance);
-const ingredientRepositoryInstance = new IngredientRepository(Constants.BEVERAGES_REPOSITORY, Constants.BEVERAGES_DATA_FILE_NAME, loggerInstance);
+const ingredientRepositoryInstance = new IngredientRepository(Constants.INGREDIENT_REPOSITORY, Constants.INGREDIENTS_DATA_FILE_NAME, loggerInstance);
 
 const coffeeMachineInstance = new CoffeeMachine(beverageFactoryInstance, beverageRepositoryInstance, loggerInstance);
 
 /*********************************************/
-
 
 
 export default {

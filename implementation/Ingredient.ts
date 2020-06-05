@@ -1,8 +1,8 @@
 
 import { IngredientModel } from "Interfaces";
 import AbstractIngredientRepository from "../repository/AbstractIngredientRepository";
-import Couplings from "../couplings";
-import LowIngredientException from "exceptions/LowIngredientException";
+import Coupling from "../app";
+import LowIngredientException from "../exceptions/LowIngredientException";
 
 
 export default class Ingredient {
@@ -12,15 +12,15 @@ export default class Ingredient {
 
     constructor(ingredientModel: IngredientModel) {
         this.model = ingredientModel;
-        this.ingredientRepository = Couplings.INGREDIENT_REPOSITORY;    // dependency injection
+        this.ingredientRepository = Coupling.INGREDIENT_REPOSITORY;    // dependency injection
     }
 
-    public fetchIngredient(): Ingredient {
-        const fetchIngredient = this.ingredientRepository.fetchIngredient(this);
-        if (!fetchIngredient)
+    public fetchIngredient(): boolean {
+        const fetchedIngredient = this.ingredientRepository.fetchIngredient(this.getId(), this.getQuantity());
+        if (!fetchedIngredient)
             throw new LowIngredientException(`${this.getId()}'s quantity is low!!`);
 
-        return fetchIngredient;
+        return true;
     }
 
     public refillIngredient(): void {

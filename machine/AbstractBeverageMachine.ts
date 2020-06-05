@@ -17,9 +17,9 @@ export default abstract class AbstractBeverageMachine {
         this.beverageRepository = beverageRepository;
     }
 
-    public createBeverage(beverageModel: BeverageModel): void {
+    public createBeverage(beverageModel: BeverageModel): Beverage {
         const beverage = <Beverage> this.beverageFactory.createInstance(beverageModel);
-        beverage.prepare();
+        return beverage.prepare();
     }
 
     public getBeverages(): Array<BeverageModel> {
