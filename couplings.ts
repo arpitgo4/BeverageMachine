@@ -8,6 +8,8 @@ import logger from './utils/logger';
 
 import CoffeeMachine from './machine/CoffeeMachine';
 
+import IngredientIndicator from './implementation/IngredientIndicator';
+
 import BeverageRepository from './repository/BeverageRepository';
 import IngredientRepository from './repository/IngredientRepository';
 
@@ -30,6 +32,7 @@ const ingredientRepositoryInstance = new IngredientRepository(Constants.INGREDIE
 
 const coffeeMachineInstance = new CoffeeMachine(beverageFactoryInstance, beverageRepositoryInstance, loggerInstance);
 
+const ingredientIndicator = new IngredientIndicator(ingredientRepositoryInstance, loggerInstance);
 /*********************************************/
 
 
@@ -40,4 +43,5 @@ export default {
     GLOBAL_LOGGER: logger,
     BEVERAGE_FACTORY: beverageFactoryInstance,
     INGREDIENT_FACTORY: ingredientFactoryInstance,
+    INGREDIENT_INDICATOR: ingredientIndicator,
 }

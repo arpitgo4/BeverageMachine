@@ -81,5 +81,18 @@ describe('Beverage Machine Firmware', () => {
         const milkQtyAfter = IngredientRepo.get('Hot Milk').quantity; 
         expect(milkQtyBefore).equal(milkQtyAfter);
     });
+
+    it('should add Hot Water in Ingredient Indicator', () => {
+        const Couplings = require('../app').default;
+        const CoffeeMachine = Couplings.BEVERAGE_MACHINE;
+        const beverages = CoffeeMachine.getBeverages();
+        const hotWater = beverages.find(b => b.id === 'Hot Water');
+        CoffeeMachine.createBeverage(hotWater);
+
+        const ingredientIndicator = Couplings.INGREDIENT_INDICATOR;
+        const lowIngs = ingredientIndicator.getAllIngredients();
+        const isWater = lowIngs.find(i => i === 'Water');
+        expect(isWater).equal('Water');
+    });
     
 });

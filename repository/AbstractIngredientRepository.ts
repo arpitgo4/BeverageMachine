@@ -2,6 +2,7 @@
 import AbstractRepository from "./AbstractRepository";
 import { IngredientModel } from "Interfaces";
 import Ingredient from "../implementation/Ingredient";
+import Couplings from "../couplings";
 
 
 export default abstract class AbstractIngredientRepository extends AbstractRepository {
@@ -18,8 +19,9 @@ export default abstract class AbstractIngredientRepository extends AbstractRepos
         if (requiredQuantity <= availableQuantity) {
             ingredientModel.quantity = availableQuantity - requiredQuantity;
             this.put(ingredientName, ingredientModel);
-
-            // TODO: check for low qunaitity and add indication
+            if (ingredientModel.quantity <= ingredientModel.low_quantity) {
+                Couplings.INGREDIENT_INDICATOR.addIngredient(ingredientName);
+            }
 
             return true;
         }
@@ -33,6 +35,18 @@ export default abstract class AbstractIngredientRepository extends AbstractRepos
         const refillQuantity = ingredientInstance.getQuantity();
         ingredientModel.quantity = availableQuantity + refillQuantity;
         this.put(ingredientInstance.getId(), ingredientModel);
+    }
+
+    public refillIngredient(ingredientName: string, refillQuantity: number) {
+        const ingredientModel = <IngredientModel> this.get(ingredientName);
+        const { quantity: availableQuantity } = ingredientModel;
+        ingredientModel.quantity = availableQuantity + refillQuantity;
+
+        if (ingredientModel.low_quantity < ingredientModel.quantity) {
+            Couplings.INGREDIENT_INDICATOR.removeIngredient(ingredientName);
+        }
+
+        this.put(ingredientName, ingredientModel);
     }
 
 }

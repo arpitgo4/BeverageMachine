@@ -48,7 +48,7 @@ export default class Beverage {
                 if (e instanceof LowIngredientException) {
                     e.printErrorMessage();
                 } else {
-                    this.logger.error(`something other went wrong!! ${e.message}`);
+                    this.logger.error(`${e.message}`);
                 }
 
                 this.logger.info(`refilling fetched ingredients`);
