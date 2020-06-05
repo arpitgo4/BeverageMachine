@@ -42,7 +42,7 @@ describe('Beverage Machine Firmware', () => {
             id: "Ginger Tea", 
             ingredients_list: [
                 { "id": "Hot Milk", "quantity": 10 },
-                { "id": "Hot Water", "quantity": 1000 },
+                { "id": "Hot Water", "quantity": 100000 },
             ],
         };
         const beverage = CoffeeMachine.createBeverage(customBeverageModel);
@@ -82,17 +82,27 @@ describe('Beverage Machine Firmware', () => {
         expect(milkQtyBefore).equal(milkQtyAfter);
     });
 
-    it('should add Hot Water in Ingredient Indicator', () => {
+    it('should refill ingredient in Ingredient repository', () => {
         const Couplings = require('../app').default;
         const CoffeeMachine = Couplings.BEVERAGE_MACHINE;
-        const beverages = CoffeeMachine.getBeverages();
-        const hotWater = beverages.find(b => b.id === 'Hot Water');
-        CoffeeMachine.createBeverage(hotWater);
+        const IngredientRepository = Couplings.INGREDIENT_REPOSITORY;
 
-        const ingredientIndicator = Couplings.INGREDIENT_INDICATOR;
-        const lowIngs = ingredientIndicator.getAllIngredients();
-        const isWater = lowIngs.find(i => i === 'Water');
-        expect(isWater).equal('Water');
+        const oldQty = IngredientRepository.get('Water').quantity;
+        const CHANGE_QTY = 100;
+        CoffeeMachine.refillIngredient('Water', CHANGE_QTY);
+        const newQty = IngredientRepository.get('Water').quantity;
+        const DIFF = newQty - oldQty;
+        expect(DIFF).equal(CHANGE_QTY);
+    });
+
+    // adding 100 in each ingredient's qty before all tests
+    before(() => {
+        const Couplings = require('../app').default;
+        const CoffeeMachine = Couplings.BEVERAGE_MACHINE;
+        const IngredientRepository = Couplings.INGREDIENT_REPOSITORY;
+        const ingredients = IngredientRepository.getAll();
+        for (const ingModel of ingredients) 
+            CoffeeMachine.refillIngredient(ingModel.id, 100);
     });
     
 });

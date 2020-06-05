@@ -17,7 +17,7 @@ export default abstract class AbstractIngredientRepository extends AbstractRepos
         const { quantity: availableQuantity } = ingredientModel;
 
         if (requiredQuantity <= availableQuantity) {
-            ingredientModel.quantity = availableQuantity - requiredQuantity;
+            ingredientModel.quantity -= requiredQuantity;
             this.put(ingredientName, ingredientModel);
             if (ingredientModel.quantity <= ingredientModel.low_quantity) {
                 Couplings.INGREDIENT_INDICATOR.addIngredient(ingredientName);
@@ -39,8 +39,7 @@ export default abstract class AbstractIngredientRepository extends AbstractRepos
 
     public refillIngredient(ingredientName: string, refillQuantity: number) {
         const ingredientModel = <IngredientModel> this.get(ingredientName);
-        const { quantity: availableQuantity } = ingredientModel;
-        ingredientModel.quantity = availableQuantity + refillQuantity;
+        ingredientModel.quantity += refillQuantity;
 
         if (ingredientModel.low_quantity < ingredientModel.quantity) {
             Couplings.INGREDIENT_INDICATOR.removeIngredient(ingredientName);
