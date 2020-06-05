@@ -1,29 +1,45 @@
 
 
 import path from 'path';
+import { DataModel } from 'Interfaces';
+
 
 export default abstract class AbstractRepository {
 
-    private map: Map<string, object>;
+    private map: Map<string, DataModel>;
+    private logger: any;
+    private name: string;
 
-    constructor(configFileName: string) {
-        this.prepareRepository(configFileName);
+    constructor(repositoryName: string, repositoryFileName: string, logger: any) {
+        this.name = repositoryName;
+        this.logger = logger;
+        this.map = new Map<string, DataModel>();
+        this.prepareRepository(repositoryFileName);
     }
 
-    protected get(map: Map<string, object>, key: string): object {
-        return map.get(key);
+    protected get(key: string): DataModel {
+        return this.map.get(key);
     }
 
-    public put(map: Map<string, object>, key: string, obj: object): void {
-        map.set(key, obj);
+    protected getAll(): Array<DataModel> {
+        const result = [];
+        for (const value of this.map.values())
+            result.push(value);
+
+        return result;
     }
 
-    public remove(map: Map<string, object>, key: string): void {
-        map.delete(key);
+    public put(key: string, obj: DataModel): void {
+        this.map.set(key, obj);
     }
 
-    public prepareRepository(configFileName: string) {
-        const configFilePath = path.resolve(path.join('..', 'config', configFileName));
+    public remove(key: string): void {
+        this.map.delete(key);
+    }
+
+    private prepareRepository(configFileName: string) {
+        this.logger.info(`preparing data repository for ${this.name}`);
+        const configFilePath = path.resolve(path.join('config', configFileName));
         const config = require(configFilePath);
         for (const conf of config) {
             const { id } = conf;

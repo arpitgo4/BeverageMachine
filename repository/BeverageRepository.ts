@@ -1,12 +1,7 @@
 
-import AbstractRepository from "./AbstractRepository";
-import Constants from '../utils/constants';
+import AbstractBeverageRepository from "./AbstractBeverageRepository";
 
 
-export default class BeverageRepository extends AbstractRepository {
-
-    constructor() {
-        super(Constants.BEVERAGES_DATA_FILE_NAME);
-    }
+export default class BeverageRepository extends AbstractBeverageRepository {
 
 }
