@@ -1,17 +1,20 @@
 # Beverage Machine Firmware
-```Inventory Managements for Ingredients. Prepares beverages.```
+```
+1. List Beverages. 
+2. Prepares beverages.
+3. Indicates on low ingredient quantity.
+```
 
 # Setup
 ```
+npm install
 ```
 
 # Test
 ```
+NODE_ENV=test npm test
 ```
 
 # Class Design
-```
-Here goes the image of Class UML diagram
-```
-
-Factories will convert DataModels to Instances
+Beverage Machine UML
+# <img src="./docs/Beverage Machine.jpg" />
