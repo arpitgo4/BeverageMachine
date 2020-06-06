@@ -18,7 +18,7 @@ export default class IngredientIndicator {
         const alreadyIncluded = this.lowIngredients.some(ingName => ingName === ingrendientName);
         if (!alreadyIncluded) {
             this.lowIngredients.push(ingrendientName);
-            this.logger.info(`${ingrendientName} added to indicator!!`);
+            this.logger.warn(`${ingrendientName} added to indicator!!`);
         }
     }
 
@@ -26,7 +26,7 @@ export default class IngredientIndicator {
         const idx = this.lowIngredients.indexOf(ingrendientName);
         if (idx != -1) {
             this.lowIngredients.splice(idx, 1);
-            this.logger.info(`${ingrendientName} removed from indicator!!`);
+            this.logger.warn(`${ingrendientName} removed from indicator!!`);
         }
     }
 

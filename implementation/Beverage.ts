@@ -4,7 +4,7 @@ import Ingredient from "./Ingredient";
 import LowIngredientException from "../exceptions/LowIngredientException";
 import AbstractFactory from "../factory/AbstractFactory";
 
-import Coupling from '../app';
+import Coupling from '../couplings';
 
 export default class Beverage {
     
@@ -58,6 +58,10 @@ export default class Beverage {
         }
 
         return this;
+    }
+
+    public getId(): string {
+        return this.model.id;
     }
 
 }

@@ -1,7 +1,7 @@
 
 import { IngredientModel } from "Interfaces";
 import AbstractIngredientRepository from "../repository/AbstractIngredientRepository";
-import Coupling from "../app";
+import Coupling from "../couplings";
 import LowIngredientException from "../exceptions/LowIngredientException";
 import IngredientIndicator from "./IngredientIndicator";
 
